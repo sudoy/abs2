@@ -7,11 +7,11 @@ public class Myhab {
 	private int id;
 	private Date dating;
 	private int inOut;
-	private int category;
+	private String category;
 	private String memo;
 	private int money;
 
-	public Myhab(int id, Date dating, int inOut, int category, String memo, int money) {
+	public Myhab(int id, Date dating, int inOut, String category, String memo, int money) {
 		super();
 		this.id = id;
 		this.dating = dating;
@@ -38,10 +38,10 @@ public class Myhab {
 	public void setInOut(int inOut) {
 		this.inOut = inOut;
 	}
-	public int getCategory() {
+	public String getCategory() {
 		return category;
 	}
-	public void setCategory(int category) {
+	public void setCategory(String category) {
 		this.category = category;
 	}
 	public String getMemo() {
