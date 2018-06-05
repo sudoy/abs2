@@ -11,8 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/search.html")
 public class SearchServlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
-			throws ServletException, IOException {
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+		getServletContext().getRequestDispatcher("/WEB-INF/search.jsp").forward(req, resp);
+	}
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		getServletContext().getRequestDispatcher("/WEB-INF/serch.jsp").forward(req, resp);
 	}
 }
