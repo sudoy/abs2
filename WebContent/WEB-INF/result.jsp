@@ -1,26 +1,13 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
 
-<html lang="ja">
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
-	<link rel="stylesheet" href="css/style.css">
+<jsp:include page="_header.jsp" />
 
 	<title>My家計簿アプリ|TOP</title>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-		<div class="container">
-			<a class="navbar-brand mb-0" href="index.html">My家計簿アプリ</a>
-			<form class="form-inline">
-				<a class="btn btn-outline-success mr-2" href="search.html"><span class="oi oi-magnifying-glass"></span> 検 索</a>
-				<a class="btn btn-outline-info" href="entry.html"><span class="oi oi-plus"></span> 登 録</a>
-			</form>
-		</div>
-	</nav>
+
+<jsp:include page="_nav.jsp" />
 
 	<div class="container pt-6">
 
@@ -155,50 +142,4 @@
 		</div>
 	</div>
 
-	<hr>
-
-	<footer class="footer">
-		<div class="container">
-			<p class="text-muted small">&copy; 2018 SIE Inc.</p>
-		</div>
-	</footer>
-
-	<script src="js/jquery-3.3.1.slim.min.js"></script>
-	<script src="js/popper.min.js"></script>
-	<script src="js/bootstrap.min.js"></script>
-
-<script>
-$(function(){
-	$('.delete-btn').on('click', function(){
-		return confirm('削除してよろしいですか？');
-	});
-
-	$('.category-all').on('click', function(){
-		// allのチェック状態と他の選択肢のチェック状態をリンク
-		$('.category').prop('checked', $(this).prop('checked'));
-	});
-
-	$('.category').on('click', function(){
-		if(!$(this).prop('checked')){
-			// チェックが外れたときは、allのチェックも外す
-			$('.category-all').prop('checked', false);
-
-		}else{
-			// チェックが入ったときは、
-			// 他の選択肢もすべてチェックだった場合に、allをチェックする
-			var isChange = true;
-
-			$('.category').each(function(){
-				if(!$(this).prop('checked')){
-					isChange = false;
-				}
-			});
-			if(isChange){
-				$('.category-all').prop('checked', true);
-			}
-		}
-	});
-});
-</script>
-</body>
-</html>
+<jsp:include page="_footer.jsp" />
