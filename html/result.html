@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 	<link rel="stylesheet" href="css/style.css">
-	
+
 	<title>My家計簿アプリ|TOP</title>
 </head>
 <body>
@@ -21,13 +21,13 @@
 	</nav>
 
 	<div class="container pt-6">
-		
+
 		<div class="row">
 			<div class="offset-1 col">
 				<h2 class="font-weight-bold">検索結果リスト</h2>
 			</div>
 		</div>
-		
+
 		<div class="row">
 			<div class="offset-1 col">
 				<span class="badge badge-info">日付：2018/5/1 ～ 2018/5/31</span>
@@ -35,9 +35,9 @@
 				<span class="badge badge-info">備考：ランチ</span>
 			</div>
 		</div>
-		
+
 		<hr class="mt-1">
-		
+
 		<div class="row">
 			<div class="col">
 				<table class="table table-hover">
@@ -152,7 +152,7 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<hr>
 
 	<footer class="footer">
@@ -164,11 +164,37 @@
 	<script src="js/jquery-3.3.1.slim.min.js"></script>
 	<script src="js/popper.min.js"></script>
 	<script src="js/bootstrap.min.js"></script>
-	
+
 <script>
 $(function(){
 	$('.delete-btn').on('click', function(){
 		return confirm('削除してよろしいですか？');
+	});
+
+	$('.category-all').on('click', function(){
+		// allのチェック状態と他の選択肢のチェック状態をリンク
+		$('.category').prop('checked', $(this).prop('checked'));
+	});
+
+	$('.category').on('click', function(){
+		if(!$(this).prop('checked')){
+			// チェックが外れたときは、allのチェックも外す
+			$('.category-all').prop('checked', false);
+
+		}else{
+			// チェックが入ったときは、
+			// 他の選択肢もすべてチェックだった場合に、allをチェックする
+			var isChange = true;
+
+			$('.category').each(function(){
+				if(!$(this).prop('checked')){
+					isChange = false;
+				}
+			});
+			if(isChange){
+				$('.category-all').prop('checked', true);
+			}
+		}
 	});
 });
 </script>
