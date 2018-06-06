@@ -74,9 +74,9 @@ public class EntryServlet extends HttpServlet {
 			req.setAttribute("successes", successes);
 
 			//テスト用、実装時には下のsendredirect使用
-			getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp").forward(req, resp);
+			//getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp").forward(req, resp);
 
-			//resp.sendRedirect("index.html");
+			resp.sendRedirect("index.html");
 
 		} catch (Exception e) {
 			throw new ServletException(e);

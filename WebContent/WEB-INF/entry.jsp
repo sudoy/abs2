@@ -1,20 +1,14 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page import="abs2.utils.HTMLUtils"%>
 
 <jsp:include page="_header.jsp" />
 
 	<title>My家計簿アプリ|登録フォーム</title>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-light bg-light">
-		<div class="container">
-			<a class="navbar-brand mb-0" href="index.html">My家計簿アプリ</a>
-			<form class="form-inline">
-				<a class="btn btn-outline-success mr-2" href="search.html"><span class="oi oi-magnifying-glass"></span> 検 索</a>
-				<a class="btn btn-outline-info" href="entry.html"><span class="oi oi-plus"></span> 登 録</a>
-			</form>
-		</div>
-	</nav>
+
+<jsp:include page="_nav.jsp" />
 
 	<div class="container pt-6">
 
@@ -47,11 +41,13 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="in_out" class="custom-control-input" value="1"${param.in_out}>
+							<input type="radio" id="division1" name="in_out" class="custom-control-input" 
+							value="1" ${HTMLUtils.checkInOut(param.in_out != null? param.in_out : myhab.inOut, '1')}>
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="in_out" class="custom-control-input"value="2" ${param.in_out}>
+							<input type="radio" id="division2" name="in_out" class="custom-control-input" 
+							value="2" ${HTMLUtils.checkInOut(param.in_out != null? param.in_out : myhab.inOut, '2')}>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>
@@ -62,10 +58,10 @@
 				<label for="category" class="offset-2 col-sm-2 col-form-label font-weight-bold">カテゴリー <span class="badge badge-danger">必須</span></label>
 				<div class="col-4">
 					<select class="custom-select" id="category" name ="category">
-						<option selected>選択して下さい</option>
-						<option value="1">食費</option>
-						<option value="2">日用品</option>
-						<option value="3">交際費</option>
+						<option value="0" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '0')}>選択して下さい</option>
+						<option value="1" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '1')}>食費</option>
+						<option value="2" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '2')}>日用品</option>
+						<option value="3" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '3')}>交際費</option>
 					</select>
 				</div>
 			</div>
@@ -85,7 +81,6 @@
 			<div class="form-group row">
 				<div class="offset-4 col-8">
 					<a href="index.html" class="btn btn-secondary">キャンセル</a>
-					<a href="index.html" class="btn btn-primary"><span class="oi oi-check"></span> 登録OK</a>
 					<input type="submit" class="btn btn-primary glyphicon glyphicon-ok" value="登録OK" />
 				</div>
 			</div>

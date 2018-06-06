@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
+<%@ page import="abs2.utils.HTMLUtils"%>
 
 <jsp:include page="_header.jsp" />
 
@@ -11,6 +12,10 @@
 
 	<div class="container pt-6">
 
+<!-- start alerts -->
+<jsp:include page="_successes.jsp" />
+<jsp:include page="_errors.jsp" />
+<!-- end alerts -->
 
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
@@ -36,11 +41,13 @@
 					<legend class="offset-2 col-form-label col-2 pt-0 font-weight-bold">区分</legend>
 					<div class="col-sm-8">
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division1" name="in_out" class="custom-control-input" value="1" checked>
+							<input type="radio" id="division1" name="in_out" class="custom-control-input" 
+							value="1" ${HTMLUtils.checkInOut(param.in_out != null? param.in_out : myhab.inOut, '1')}>
 							<label class="custom-control-label" for="division1">支出</label>
 						</div>
 						<div class="custom-control custom-radio custom-control-inline">
-							<input type="radio" id="division2" name="in_out" class="custom-control-input" value="2">
+							<input type="radio" id="division2" name="in_out" class="custom-control-input" 
+							value="2" ${HTMLUtils.checkInOut(param.in_out != null? param.in_out : myhab.inOut, '2')}>
 							<label class="custom-control-label" for="division2">収入</label>
 						</div>
 					</div>
@@ -52,9 +59,9 @@
 				<div class="col-4">
 					<select class="custom-select" name="category" id="category">
 						<option>選択して下さい</option>
-						<option value="1" selected>食費</option>
-						<option value="2">日用品</option>
-						<option value="3">交際費</option>
+						<option value="1" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '1')}>食費</option>
+						<option value="2" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '2')}>日用品</option>
+						<option value="3" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '3')}>交際費</option>
 					</select>
 				</div>
 			</div>

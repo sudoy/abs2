@@ -4,13 +4,16 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import abs2.beans.Myhab;
 import abs2.utils.DBUtils;
@@ -77,7 +80,7 @@ public class UpdateServlet extends HttpServlet {
 			throws ServletException, IOException {
 		
 		req.setCharacterEncoding("utf-8");
-		//HttpSession session = req.getSession();
+		HttpSession session = req.getSession();
 
 		String id = req.getParameter("id");
 		String dating = req.getParameter("dating");
@@ -88,13 +91,13 @@ public class UpdateServlet extends HttpServlet {
 
 
 		//バリデーションチェック
-//		List<String> errors = validate(id, dating, inout, category, memo, money);
-//		if (errors.size() > 0) {
-//			req.setAttribute("errors", errors);
-//			//session.setAttribute("errors", errors);
-//			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
-//			return;
-//		}
+		List<String> errors = validate(id, dating, inOut, category, memo, money);
+		if (errors.size() > 0) {
+			req.setAttribute("errors", errors);
+			//session.setAttribute("errors", errors);
+			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
+			return;
+		}
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -116,9 +119,9 @@ public class UpdateServlet extends HttpServlet {
 System.out.println(ps);
 			ps.executeUpdate();
 
-//			List<String> successes = new ArrayList<>();
-//			successes.add("更新しました。");
-//			session.setAttribute("successes", successes);
+			List<String> successes = new ArrayList<>();
+			successes.add("更新しました。");
+			session.setAttribute("successes", successes);
 			resp.sendRedirect("index.html");
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -134,27 +137,27 @@ System.out.println(ps);
 			}
 		}
 	}
-}
 
-//	private List<String> validate(String id, String dating, String inout, String category, String memo, String money) {
-//		List<String> errors = new ArrayList<>();
-//		
-//		//日付の必須入力
-//		if (dating.equals("")) {
-//			errors.add("日付は必須入力です。");
-//		}
-//
-//		//カテゴリーの必須入力
-//		if (!category.equals("1") && !category.equals("2")) {
-//			errors.add("カテゴリーは必須入力です。");
-//		}
-//
-//		//金額の必須入力
-//		if (money.equals("")) {
-//			errors.add("金額は必須入力です。");
-//		}
-//
-//		return errors;
-//		
-//	}
-//}
+
+	private List<String> validate(String id, String dating, String inout, String category, String memo, String money) {
+		List<String> errors = new ArrayList<>();
+		
+		//日付の必須入力
+		if (dating.equals("")) {
+			errors.add("日付は必須入力です。");
+		}
+
+		//カテゴリーの必須入力
+		if (!category.equals("1") && !category.equals("2")) {
+			errors.add("カテゴリーは必須入力です。");
+		}
+
+		//金額の必須入力
+		if (money.equals("")) {
+			errors.add("金額は必須入力です。");
+		}
+
+		return errors;
+		
+	}
+}
