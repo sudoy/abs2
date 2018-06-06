@@ -11,36 +11,6 @@
 
 	<div class="container pt-6">
 
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-success alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> 成功しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<li>「2018/05/30 交際費 -6,800」を登録しました。</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<li>日付は必須入力です。</li>
-						<li>カテゴリーは必須入力です。</li>
-						<li>金額は必須入力です。</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
 				<h2 class="font-weight-bold">詳細フォーム</h2>
@@ -53,7 +23,7 @@
 			<div class="form-group row">
 				<label for="date" class="offset-2 col-sm-2 col-form-label font-weight-bold">日付</label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="2018/05/31" readonly>
+					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="${param.dating != null ? param.dating : myhab.dating}" readonly>
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -90,13 +60,13 @@
 			<div class="form-group row">
 				<label for="note" class="offset-2 col-sm-2 col-form-label font-weight-bold">備考</label>
 				<div class="col-6">
-					<textarea class="form-control" id="note" placeholder="備考" rows="3" readonly>ランチ</textarea>
+					<textarea class="form-control" id="note" placeholder="備考" rows="3" readonly>${myhab.memo}</textarea>
 				</div>
 			</div>
 			<div class="form-group row">
 				<label for="amount" class="offset-2 col-sm-2 col-form-label font-weight-bold">金額</label>
 				<div class="col-2">
-					<input type="text" class="form-control" id="amount" placeholder="金額" value="800" readonly>
+					<input type="text" class="form-control" id="amount" placeholder="金額" value="${myhab.money}" readonly>
 				</div>
 			</div>
 
