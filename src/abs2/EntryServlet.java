@@ -18,15 +18,15 @@ import abs2.utils.DBUtils;
 @WebServlet("/entry.html")
 public class EntryServlet extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 
 		getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp").forward(req, resp);
 }
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) 
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
-		
+
 		req.setCharacterEncoding("utf-8");
 		//HttpSession session = req.getSession();
 
@@ -34,7 +34,7 @@ public class EntryServlet extends HttpServlet {
 		String inout = req.getParameter("in_out");
 		String category = req.getParameter("category");
 		String memo = req.getParameter("memo");
-		String money = req.getParameter("money");
+		String money =req.getParameter("money");
 
 		//バリデーションチェック
 		List<String> errors = validate(dating, inout, category, memo, money);
@@ -44,8 +44,8 @@ public class EntryServlet extends HttpServlet {
 			return;
 		}
 
-		
-		
+
+
 		Connection con = null;
 		PreparedStatement ps = null;
 		String sql = null;
@@ -61,8 +61,12 @@ public class EntryServlet extends HttpServlet {
 			ps.setString(2, inout);
 			ps.setString(3, category);
 			ps.setString(4, memo);
-			ps.setString(5, money);
-			
+			if(inout.equals("2")) {
+				ps.setString(5, money);
+			} else {
+				ps.setString(5, "-" + money);
+			}
+
 			ps.executeUpdate();
 			List<String> successes = new ArrayList<>();
 			successes.add("登録しました。");
@@ -73,7 +77,7 @@ public class EntryServlet extends HttpServlet {
 			getServletContext().getRequestDispatcher("/WEB-INF/entry.jsp").forward(req, resp);
 
 			//resp.sendRedirect("index.html");
-			
+
 		} catch (Exception e) {
 			throw new ServletException(e);
 		} finally {
@@ -88,10 +92,10 @@ public class EntryServlet extends HttpServlet {
 			}
 		}
 	}
-	
+
 	private List<String> validate(String dating, String inout, String category, String memo, String money) {
 		List<String> errors = new ArrayList<>();
-		
+
 		//日付の必須入力
 		if (dating.equals("")) {
 			errors.add("日付は必須入力です。");
