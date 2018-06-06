@@ -15,7 +15,7 @@
 				</button>
 				<ul>
 					<c:forEach var="successes" items="${successes}">
-						<li>「${param.dating} ${param.category} ${param.money}」を ${successes}</li>
+						<li>${successes}</li>
 					</c:forEach>
 				</ul>
 			</div>
