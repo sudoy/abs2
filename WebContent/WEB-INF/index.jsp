@@ -2,6 +2,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
+<c:set var="b">-1</c:set>
+<c:set var="a">1</c:set>
 <jsp:include page="_header.jsp" />
 
 <title>My家計簿アプリ|TOP</title>
@@ -23,7 +25,7 @@
 						<li class="page-item"><a class="page-link" href="#"><span
 								class="oi oi-chevron-left"></span><span
 								class="oi oi-chevron-left"></span> 前年</a></li>
-						<li class="page-item"><a class="page-link" href="#"><span
+						<li class="page-item"><a class="page-link" href="index.html?send=${b}"><span
 								class="oi oi-chevron-left"></span> 前月</a></li>
 					</ul>
 				</nav>
@@ -39,7 +41,7 @@
 			<div class="col">
 				<nav class="float-right">
 					<ul class="pagination">
-						<li class="page-item disabled"><a class="page-link" href="#">翌月
+						<li class="page-item"><a class="page-link" href="index.html?send=${a}">翌月
 								<span class="oi oi-chevron-right"></span>
 						</a></li>
 						<li class="page-item disabled"><a class="page-link" href="#">翌年
