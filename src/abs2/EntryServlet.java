@@ -34,7 +34,12 @@ public class EntryServlet extends HttpServlet {
 		String inout = req.getParameter("in_out");
 		String category = req.getParameter("category");
 		String memo = req.getParameter("memo");
-		String money =req.getParameter("money");
+		String money = null;
+		if (inout.equals("2")) {
+			money = req.getParameter("money");
+		} else {
+			money = "-" + req.getParameter("money");
+		};
 
 		//バリデーションチェック
 		List<String> errors = validate(dating, inout, category, memo, money);
@@ -61,11 +66,7 @@ public class EntryServlet extends HttpServlet {
 			ps.setString(2, inout);
 			ps.setString(3, category);
 			ps.setString(4, memo);
-			if(inout.equals("2")) {
-				ps.setString(5, money);
-			} else {
-				ps.setString(5, "-" + money);
-			}
+			ps.setString(5, money);
 
 			ps.executeUpdate();
 			List<String> successes = new ArrayList<>();
@@ -112,6 +113,6 @@ public class EntryServlet extends HttpServlet {
 		}
 
 		return errors;
-		
+
 	}
 }

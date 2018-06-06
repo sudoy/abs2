@@ -1,5 +1,6 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <jsp:include page="_header.jsp" />
 
@@ -30,7 +31,8 @@
 
 			<div class="col text-center">
 				<h2 class="font-weight-bold">
-					<span class="oi oi-calendar"></span> 2018年5月
+					<span class="oi oi-calendar"></span>
+					${today}
 				</h2>
 			</div>
 

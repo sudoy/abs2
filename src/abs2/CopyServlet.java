@@ -85,6 +85,8 @@ public class CopyServlet extends HttpServlet {
 		String memo = req.getParameter("memo");
 		String money = req.getParameter("money");
 
+
+
 		//バリデーションチェック
 		List<String> errors = validate(dating, inout, category, memo, money);
 		if (errors.size() > 0) {
@@ -107,11 +109,8 @@ public class CopyServlet extends HttpServlet {
 			ps.setString(2, inout);
 			ps.setString(3, category);
 			ps.setString(4, memo);
-			if (inout.equals("2")) {
-				ps.setString(5, money);
-			} else {
-				ps.setString(5, "-" + money);
-			}
+			ps.setString(5, money);
+
 
 			ps.executeUpdate();
 			List<String> successes = new ArrayList<>();
