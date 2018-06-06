@@ -10,29 +10,19 @@
 <jsp:include page="_nav.jsp" />
 
 	<div class="container pt-6">
-			
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<li>検索結果は1件もありません。</li>
-					</ul>
-				</div>
-			</div>
-		</div>
-		
+
+	<!-- start alerts「ここのエラー文は、検索結果は1件もありません。」 -->
+	<jsp:include page="_errors.jsp" />
+	<!-- end alerts -->
+
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
 				<h2 class="font-weight-bold">検索フォーム</h2>
 			</div>
 		</div>
-		
+
 		<hr class="mt-1">
-		
+
 		<form action="#" method="post">
 			<div class="form-group row">
 				<label for="date" class="offset-1 col-sm-2 col-form-label font-weight-bold">日付</label>
@@ -76,14 +66,14 @@
 					</div>
 				</div>
 			</fieldset>
-			
+
 			<div class="form-group row">
 				<label for="note" class="offset-1 col-sm-2 col-form-label font-weight-bold">備考 <span class="badge badge-success	">部分一致</span></label>
 				<div class="col-5">
 					<input type="text" class="form-control" id="note" placeholder="備考">
 				</div>
 			</div>
-			
+
 			<div class="form-group row">
 				<div class="offset-3 col-8">
 					<a href="index.html" class="btn btn-secondary">キャンセル</a>
@@ -92,5 +82,5 @@
 			</div>
 		</form>
 	</div>
-	
+
 <jsp:include page="_footer.jsp" />
