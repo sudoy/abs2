@@ -1,9 +1,7 @@
 <%@ page language="java" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
-<c:set var="b">-1</c:set>
-<c:set var="a">1</c:set>
+<c:set var="data" value="${today}" />
 <jsp:include page="_header.jsp" />
 
 <title>My家計簿アプリ|TOP</title>
@@ -25,7 +23,7 @@
 						<li class="page-item"><a class="page-link" href="#"><span
 								class="oi oi-chevron-left"></span><span
 								class="oi oi-chevron-left"></span> 前年</a></li>
-						<li class="page-item"><a class="page-link" href="index.html?send=${b}"><span
+						<li class="page-item"><a class="page-link" href="index.html?back=${data}"><span
 								class="oi oi-chevron-left"></span> 前月</a></li>
 					</ul>
 				</nav>
@@ -34,14 +32,14 @@
 			<div class="col text-center">
 				<h2 class="font-weight-bold">
 					<span class="oi oi-calendar"></span>
-					${today}
+					${data}
 				</h2>
 			</div>
 
 			<div class="col">
 				<nav class="float-right">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="index.html?send=${a}">翌月
+						<li class="page-item"><a class="page-link" href="index.html?next=${data}">翌月
 								<span class="oi oi-chevron-right"></span>
 						</a></li>
 						<li class="page-item disabled"><a class="page-link" href="#">翌年
@@ -63,8 +61,6 @@
 		</c:if>
 		</c:forEach>
 
-
-
 		<div class="row pt-1">
 			<div class="col">
 				<div class="card bg-light border-info mb-4">
@@ -73,7 +69,7 @@
 					</div>
 					<div class="card-body">
 						<p class="card-text text-center">
-							${totalplus} <small class="text-info">（+ 0）</small>
+							${0 + totalplus} <small class="text-info">（+ 0）</small>
 						</p>
 					</div>
 				</div>
@@ -86,7 +82,7 @@
 					</div>
 					<div class="card-body">
 						<p class="card-text text-center">
-							${totalminus} <small class="text-danger">（- 0）</small>
+							${0 + totalminus} <small class="text-danger">（- 0）</small>
 						</p>
 					</div>
 				</div>

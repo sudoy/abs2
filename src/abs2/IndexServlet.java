@@ -4,11 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -33,55 +31,61 @@ public class IndexServlet extends HttpServlet {
 		ResultSet rs = null;
 
 
-		Date now = new Date();
-		SimpleDateFormat f1 = new SimpleDateFormat("yyyy-MM-dd");
-		String today = f1.format(now);
+		// localDateから現在時刻を抽出するか否かの判定
+		LocalDate ld = null;
+		String back = req.getParameter("back"); //前月
+		String next = req.getParameter("next"); //翌月
 
-		LocalDate ld = LocalDate.parse(today);
+		if(back != null) {
+			ld = LocalDate.parse(back + "01日", DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
+		} else if(next != null) {
+			ld = LocalDate.parse(next + "01日", DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
+		} else {
+			ld = LocalDate.now();
+		};
+
+		// 今月と月初と月末の変数宣言
+		String today = null;
 		LocalDate first = null;
 		LocalDate last = null;
 
-		String send = req.getParameter("send");
+		// 先月と翌月のパラメータ取得
 
-		if(send != null) {
+		System.out.println("ld：" + ld);
+		System.out.println("back：" + back);
+		System.out.println("next：" + next);
+
+		if(back != null) {
 			// 先月
-			first = ld.withDayOfMonth(1).plusMonths(-1);
-			last = ld.withDayOfMonth(1).plusDays(-1);
+			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.minusMonths(1));
+			first = ld.withDayOfMonth(1).minusMonths(1);
+			last = ld.withDayOfMonth(1).minusDays(1);
+		} else if(next != null) {
+			// 翌月
+			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.plusMonths(1));
+			first = ld.withDayOfMonth(1).plusMonths(1);
+			last = ld.withDayOfMonth(1).plusMonths(2).minusDays(1);
 		} else {
 			// 今月
+			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld);
 			first = ld.withDayOfMonth(1);
-			last = ld.withDayOfMonth(1).plusMonths(1).plusDays(-1);
+			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1);
 		};
-
-		Date hai = Date.from(first.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		String hai2 = f1.format(hai);
-		Date hai3 = Date.from(last.atStartOfDay(ZoneId.systemDefault()).toInstant());
-		String hai4 = f1.format(hai3);
-
-
-		SimpleDateFormat f2 = new SimpleDateFormat("yyyy年MM月");
-		String today2 = f2.format(now);
-
 
 
 		try {
 			con = DBUtils.getConnection();
 			// SQL
-
-//			String today = req.getParameter("today");
-//			System.out.println(todays);
-//			System.out.println(today);
-
 			sql = "SELECT m.id, m.dating, m.in_out, c.category_name, m.memo, m.money FROM myhab m LEFT JOIN categorylist c ON m.category = c.category_id WHERE m.dating BETWEEN ? AND ? ORDER BY m.dating";
-
 
 			// SELECT命令の準備
 			ps = con.prepareStatement(sql);
 
-			ps.setString(1, hai2);
-			ps.setString(2, hai4);
-			// 実行
+			// where句に代入
+			ps.setString(1, first.toString());
+			ps.setString(2, last.toString());
 
+			// 実行
 			rs = ps.executeQuery();
 
 			List<Myhab> list = new ArrayList<>();
@@ -93,11 +97,10 @@ public class IndexServlet extends HttpServlet {
 						rs.getString("category_name"),
 						rs.getString("memo"),
 						rs.getInt("money"));
-
 				list.add(a);
 			}
 			// JavaBeansをJSPに渡す
-			session.setAttribute("today", today2);
+			session.setAttribute("today", today);
 			session.setAttribute("list", list);
 
 			getServletContext().getRequestDispatcher("/WEB-INF/index.jsp").forward(req, resp);
@@ -117,11 +120,12 @@ public class IndexServlet extends HttpServlet {
 
 			}
 		}
+
 	}
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		resp.sendRedirect("index.html");
-		}
+	}
 }
