@@ -49,6 +49,18 @@
 			</div>
 		</div>
 
+		<!-- 支出別合計金額の計算部分、ここ美しくない -->
+		<c:forEach var="myhab" items="${list}">
+		<c:if test="${myhab.money >= 0}">
+		<c:set var="totalplus" value="${totalplus + myhab.money}"/>
+		</c:if>
+		<c:if test="${myhab.money <= 0}">
+		<c:set var="totalminus" value="${totalminus + myhab.money}"/>
+		</c:if>
+		</c:forEach>
+
+
+
 		<div class="row pt-1">
 			<div class="col">
 				<div class="card bg-light border-info mb-4">
@@ -57,7 +69,7 @@
 					</div>
 					<div class="card-body">
 						<p class="card-text text-center">
-							120,000 <small class="text-info">（+ 12,000）</small>
+							${totalplus} <small class="text-info">（+ 0）</small>
 						</p>
 					</div>
 				</div>
@@ -70,13 +82,12 @@
 					</div>
 					<div class="card-body">
 						<p class="card-text text-center">
-							-1,230 <small class="text-danger">（- 12,000）</small>
+							${totalminus} <small class="text-danger">（- 0）</small>
 						</p>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="row">
 			<div class="col">
 				<table class="table table-hover">
@@ -92,6 +103,7 @@
 
 					<tbody>
 						<c:forEach var="myhab" items="${list}">
+						<c:set var="total" value="${total + myhab.money}"/>
 							<tr class="table-light">
 								<th scope="row">
 									<div class="btn-group">
@@ -102,10 +114,10 @@
 										<div class="dropdown-menu">
 											<a class="dropdown-item" href="detail.html?id=${myhab.id}"><span
 												class="oi oi-spreadsheet"></span> 詳細</a> <a
-												class="dropdown-item" href="copy.html"><span
+												class="dropdown-item" href="copy.html?id=${myhab.id}"><span
 												class="oi oi-paperclip"></span> コピー</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item delete-btn" href="index.html"><span
+											<a class="dropdown-item delete-btn" href="index.html?id=${myhab.id}"><span
 												class="oi oi-trash"></span> 削除</a>
 										</div>
 									</div>
@@ -122,5 +134,4 @@
 			</div>
 		</div>
 	</div>
-
 	<jsp:include page="_footer.jsp" />

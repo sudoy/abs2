@@ -52,6 +52,7 @@ public class IndexServlet extends HttpServlet {
 						rs.getInt("money"));
 
 				list.add(a);
+				System.out.println(a);
 			}
 			// JavaBeansをJSPに渡す
 			req.setAttribute("list", list);
