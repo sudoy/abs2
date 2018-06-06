@@ -18,39 +18,10 @@
 
 	<div class="container pt-6">
 
-		<div class="row">
-			<div class="col">
-				<div class="alert alert-success alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> 成功しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<c:forEach var="success" items="${successes}">
-							<li>「${param.dating} ${param.in_out} ${param.category} ${param.money}」${success}</li>
-						</c:forEach>
-					</ul>
-				</div>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col">
-				<c:if test="${errors.size() > 0}">
-				<div class="alert alert-danger alert-dismissible fade show" role="alert">
-					<h4 class="alert-heading h5 font-weight-bold"><span class="oi oi-pin"></span> エラーが発生しました！</h4>
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-					<ul>
-						<c:forEach var="error" items="${errors}">
-							<li>${error}</li>
-						</c:forEach>
-					</ul>
-				</div>
-				</c:if>
-			</div>
-		</div>
+	<!-- start alerts -->
+	<jsp:include page="_successes.jsp" />
+	<jsp:include page="_errors.jsp" />
+	<!-- end alerts -->
 
 		<div class="row justify-content-between">
 			<div class="offset-1 col">
