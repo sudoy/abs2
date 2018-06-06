@@ -20,7 +20,6 @@ public class DetailServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-		getServletContext().getRequestDispatcher("/WEB-INF/detail.jsp").forward(req, resp);
 		req.setCharacterEncoding("utf-8");
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -44,12 +43,12 @@ public class DetailServlet extends HttpServlet {
 
 			int id = rs.getInt("id");
 			Date dating = rs.getDate("dating");
-			int inout = rs.getInt("in_out");
+			int inOut = rs.getInt("in_out");
 			String category = rs.getString("category");
 			String memo = rs.getString("memo");
 			int money = rs.getInt("money");
 
-			Myhab myhab = new Myhab(id, dating, inout, category, memo, money);
+			Myhab myhab = new Myhab(id, dating, inOut, category, memo, money);
 			req.setAttribute("myhab", myhab);
 
 			//JSPへフォワード
