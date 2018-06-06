@@ -33,45 +33,60 @@ public class IndexServlet extends HttpServlet {
 
 		// localDateから現在時刻を抽出するか否かの判定
 		LocalDate ld = null;
-		String back = req.getParameter("back"); //前月
-		String next = req.getParameter("next"); //翌月
 
-		if(back != null) {
-			ld = LocalDate.parse(back + "01日", DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
-		} else if(next != null) {
-			ld = LocalDate.parse(next + "01日", DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
+		// どの変数を見るか選択
+		String check = null;
+
+		if(req.getParameter("back") != null) {
+			check = req.getParameter("back");
+		} else if(req.getParameter("next") != null) {
+			check = req.getParameter("next");
+		} else if(req.getParameter("before") != null) {
+			check = req.getParameter("before");
+		} else if(req.getParameter("after") != null) {
+			check = req.getParameter("after");
+		}
+
+		// checkに何もない場合現在日時抽出、ある場合はLocalDateに変換
+		if(check != null) {
+			ld = LocalDate.parse(check + "01日", DateTimeFormatter.ofPattern("yyyy年MM月dd日"));
 		} else {
 			ld = LocalDate.now();
 		};
 
-		// 今月と月初と月末の変数宣言
+		// 表示月とその月初末の変数宣言
 		String today = null;
 		LocalDate first = null;
 		LocalDate last = null;
 
-		// 先月と翌月のパラメータ取得
+		// 前月と翌月のパラメータ取得
 
-		System.out.println("ld：" + ld);
-		System.out.println("back：" + back);
-		System.out.println("next：" + next);
-
-		if(back != null) {
-			// 先月
+		if(req.getParameter("back") != null) {
+			// 前月
 			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.minusMonths(1));
 			first = ld.withDayOfMonth(1).minusMonths(1);
 			last = ld.withDayOfMonth(1).minusDays(1);
-		} else if(next != null) {
+		} else if(req.getParameter("next") != null) {
 			// 翌月
 			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.plusMonths(1));
 			first = ld.withDayOfMonth(1).plusMonths(1);
 			last = ld.withDayOfMonth(1).plusMonths(2).minusDays(1);
+		} else if(req.getParameter("before") != null) {
+			// 前年
+			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.minusYears(1));
+			first = ld.withDayOfMonth(1).minusYears(1);
+			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1).minusYears(1);
+		} else if(req.getParameter("after") != null) {
+			// 翌年
+			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld.plusYears(1));
+			first = ld.withDayOfMonth(1).plusYears(1);
+			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1).plusYears(1);
 		} else {
 			// 今月
 			today = DateTimeFormatter.ofPattern("yyyy年MM月").format(ld);
 			first = ld.withDayOfMonth(1);
 			last = ld.withDayOfMonth(1).plusMonths(1).minusDays(1);
 		};
-
 
 		try {
 			con = DBUtils.getConnection();

@@ -20,7 +20,7 @@
 			<div class="col">
 				<nav class="float-left">
 					<ul class="pagination">
-						<li class="page-item"><a class="page-link" href="#"><span
+						<li class="page-item"><a class="page-link" href="index.html?before=${data}"><span
 								class="oi oi-chevron-left"></span><span
 								class="oi oi-chevron-left"></span> 前年</a></li>
 						<li class="page-item"><a class="page-link" href="index.html?back=${data}"><span
@@ -35,14 +35,14 @@
 					${data}
 				</h2>
 			</div>
-
+			<!-- クリックできないようにする「disabled」<li>に記入 -->
 			<div class="col">
 				<nav class="float-right">
 					<ul class="pagination">
 						<li class="page-item"><a class="page-link" href="index.html?next=${data}">翌月
 								<span class="oi oi-chevron-right"></span>
 						</a></li>
-						<li class="page-item disabled"><a class="page-link" href="#">翌年
+						<li class="page-item"><a class="page-link" href="index.html?after=${data}">翌年
 								<span class="oi oi-chevron-right"></span><span
 								class="oi oi-chevron-right"></span>
 						</a></li>
