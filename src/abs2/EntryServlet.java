@@ -108,5 +108,6 @@ public class EntryServlet extends HttpServlet {
 		}
 
 		return errors;
+		
 	}
 }
