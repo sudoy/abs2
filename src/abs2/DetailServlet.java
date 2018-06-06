@@ -40,6 +40,7 @@ public class DetailServlet extends HttpServlet {
 			//select命令を実行
 			rs = ps.executeQuery();
 
+			
 			rs.next();
 
 			int id = rs.getInt("id");
