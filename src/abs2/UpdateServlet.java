@@ -93,7 +93,6 @@ public class UpdateServlet extends HttpServlet {
 		//バリデーションチェック
 		List<String> errors = validate(id, dating, inOut, category, memo, money);
 		if (errors.size() > 0) {
-			req.setAttribute("errors", errors);
 			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
 			return;

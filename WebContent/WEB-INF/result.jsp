@@ -1,5 +1,6 @@
 <%@page contentType="text/html; charset=UTF-8"%>
 <%@page pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <jsp:include page="_header.jsp" />
 
@@ -19,9 +20,9 @@
 
 		<div class="row">
 			<div class="offset-1 col">
-				<span class="badge badge-info">日付：2018/5/1 ～ 2018/5/31</span>
-				<span class="badge badge-info">カテゴリー：日用品、食費</span>
-				<span class="badge badge-info">備考：ランチ</span>
+				<span class="badge badge-info">日付：${param.dating1}～${param.dating2}</span>
+				<span class="badge badge-info">カテゴリー：</span>
+				<span class="badge badge-info">備考：${param.memo}</span>
 			</div>
 		</div>
 
@@ -39,104 +40,36 @@
 							<th scope="col" style="width: 120px;">金額</th>
 						</tr>
 					</thead>
-					<tbody>
-						<tr class="table-light">
-							<th scope="row">
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										操作
-									</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="detail.html"><span class="oi oi-spreadsheet"></span> 詳細</a>
-										<a class="dropdown-item" href="copy.html"><span class="oi oi-paperclip"></span> コピー</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item delete-btn" href="index.html"><span class="oi oi-trash"></span> 削除</a>
-									</div>
-								</div>
-							</th>
-							<td>2018/05/30</td>
-							<td>日用品</td>
-							<td>ティッシュペーパー、歯磨き粉など</td>
-							<td class="text-right">-740</td>
-						</tr>
-						<tr class="table-light">
-							<th scope="row">
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										操作
-									</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="detail.html"><span class="oi oi-spreadsheet"></span> 詳細</a>
-										<a class="dropdown-item" href="copy.html"><span class="oi oi-paperclip"></span> コピー</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item delete-btn" href="index.html"><span class="oi oi-trash"></span> 削除</a>
-									</div>
-								</div>
-							</th>
-							<td>2018/05/30</td>
-							<td>食費</td>
-							<td>ランチ</td>
-							<td class="text-right">-800</td>
-						</tr>
-						<tr class="table-light">
-							<th scope="row">
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										操作
-									</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="detail.html"><span class="oi oi-spreadsheet"></span> 詳細</a>
-										<a class="dropdown-item" href="copy.html"><span class="oi oi-paperclip"></span> コピー</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item delete-btn" href="index.html"><span class="oi oi-trash"></span> 削除</a>
-									</div>
-								</div>
-							</th>
-							<td>2018/05/30</td>
-							<td>交際費</td>
-							<td></td>
-							<td class="text-right">-6,800</td>
-						</tr>
-						<tr class="table-info">
-							<th scope="row">
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										操作
-									</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="detail.html"><span class="oi oi-spreadsheet"></span> 詳細</a>
-										<a class="dropdown-item" href="copy.html"><span class="oi oi-paperclip"></span> コピー</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item delete-btn" href="index.html"><span class="oi oi-trash"></span> 削除</a>
-									</div>
-								</div>
-							</th>
-							<td>2018/05/31</td>
-							<td>アルバイト代</td>
-							<td></td>
-							<td class="text-right">120,000</td>
-						</tr>
-						<tr class="table-light">
-							<th scope="row">
-								<div class="btn-group">
-									<button type="button" class="btn btn-secondary btn-sm dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-										操作
-									</button>
-									<div class="dropdown-menu">
-										<a class="dropdown-item" href="detail.html"><span class="oi oi-spreadsheet"></span> 詳細</a>
-										<a class="dropdown-item" href="update.html"><span class="oi oi-paperclip"></span> コピー</a>
-										<div class="dropdown-divider"></div>
-										<a class="dropdown-item delete-btn" href="index.html"><span class="oi oi-trash"></span> 削除</a>
-									</div>
-								</div>
 
-							</th>
-							<td>2018/05/31</td>
-							<td>交際費</td>
-							<td></td>
-							<td class="text-right">-6,800</td>
-						</tr>
+					<tbody>
+						<c:forEach var="myhab" items="${list}" varStatus="a">
+						<c:set var="total" value="${total + myhab.money}"/>
+							<tr class="table-light">
+								<th scope="row">
+									<div class="btn-group">
+										<button type="button"
+											class="btn btn-secondary btn-sm dropdown-toggle"
+											data-toggle="dropdown" aria-haspopup="true"
+											aria-expanded="false">操作</button>
+										<div class="dropdown-menu">
+											<a class="dropdown-item" href="detail.html?id=${myhab.id}"><span
+												class="oi oi-spreadsheet"></span> 詳細</a> <a
+												class="dropdown-item" href="copy.html?id=${myhab.id}"><span
+												class="oi oi-paperclip"></span> コピー</a>
+											<div class="dropdown-divider"></div>
+											<a class="dropdown-item delete-btn" href="delete.html?id=${myhab.id}"><span
+												class="oi oi-trash"></span> 削除</a>
+										</div>
+									</div>
+								</th>
+								<td>${myhab.dating}</td>
+								<td>${myhab.category}</td>
+								<td>${myhab.memo}</td>
+								<td class="text-right">${myhab.money}</td>
+							</tr>
+						</c:forEach>
 					</tbody>
+
 				</table>
 			</div>
 		</div>

@@ -23,18 +23,18 @@
 
 		<hr class="mt-1">
 
-		<form action="#" method="post">
+		<form action="result.html" method="post">
 			<div class="form-group row">
 				<label for="date" class="offset-1 col-sm-2 col-form-label font-weight-bold">日付</label>
 
 				<div class="col-2">
-					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="2018/05/31">
+					<input type="text" class="form-control" id="date" name="dating1" placeholder="日付" aria-describedby="dateHelp">
 				</div>
 				<div class="col-1">
 					<input type="text" readonly class="form-control-plaintext text-center" id="staticEmail" value="～">
 				</div>
 				<div class="col-2">
-					<input type="text" class="form-control" id="date" placeholder="日付" aria-describedby="dateHelp" value="2018/05/31">
+					<input type="text" class="form-control" id=" date" name="dating2" placeholder="日付" aria-describedby="dateHelp">
 				</div>
 				<div class="col-4">
 					<small id="dateHelp" class="text-muted align-bottom">「YYYY/MM/DD」形式で入力してください。</small>
@@ -52,15 +52,15 @@
 					</div>
 					<div class="offset-3 col-sm-8">
 						<div class="custom-control custom-checkbox custom-control-inline">
- 							<input type="checkbox" id="category1" name="customRadioInline1" class="custom-control-input category" checked>
+ 							<input type="checkbox" id="category1" name="customRadioInline1" class="custom-control-input category" value="1" checked>
 							<label class="custom-control-label" for="category1">食費</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category2" name="customRadioInline1" class="custom-control-input category" checked>
+							<input type="checkbox" id="category2" name="customRadioInline1" class="custom-control-input category" value="2" checked>
 							<label class="custom-control-label" for="category2">日用品</label>
 						</div>
 						<div class="custom-control custom-checkbox custom-control-inline">
-							<input type="checkbox" id="category3" name="customRadioInline1" class="custom-control-input category" checked>
+							<input type="checkbox" id="category3" name="customRadioInline1" class="custom-control-input category" value="3" checked>
 							<label class="custom-control-label" for="category3">交際費</label>
 						</div>
 					</div>
@@ -70,14 +70,14 @@
 			<div class="form-group row">
 				<label for="note" class="offset-1 col-sm-2 col-form-label font-weight-bold">備考 <span class="badge badge-success	">部分一致</span></label>
 				<div class="col-5">
-					<input type="text" class="form-control" id="note" placeholder="備考">
+					<input type="text" class="form-control" name="memo" id="note" placeholder="備考">
 				</div>
 			</div>
 
 			<div class="form-group row">
 				<div class="offset-3 col-8">
 					<a href="index.html" class="btn btn-secondary">キャンセル</a>
-					<a href="result.html" class="btn btn-primary"><span class="oi oi-magnifying-glass"></span> 検 索</a>
+					<input type="submit" class="btn btn-primary" value="検 索">
 				</div>
 			</div>
 		</form>
