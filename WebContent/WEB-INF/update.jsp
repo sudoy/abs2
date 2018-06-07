@@ -62,6 +62,11 @@
 						<option value="1" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '1')}>食費</option>
 						<option value="2" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '2')}>日用品</option>
 						<option value="3" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '3')}>交際費</option>
+<!--
+						<option value="4" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '4')}>アルバイト代</option>
+						<option value="5" ${HTMLUtils.checkCategory(param.category != null? param.category : myhab.category, '5')}>その他</option>
+-->						
+						
 					</select>
 				</div>
 			</div>

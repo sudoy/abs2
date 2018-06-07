@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import abs2.beans.Myhab;
 import abs2.utils.DBUtils;
@@ -77,7 +78,7 @@ public class CopyServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp)
 			throws ServletException, IOException {
 		req.setCharacterEncoding("utf-8");
-		//HttpSession session = req.getSession();
+		HttpSession session = req.getSession();
 
 		String dating = req.getParameter("dating");
 		String inout = req.getParameter("in_out");
@@ -114,9 +115,17 @@ public class CopyServlet extends HttpServlet {
 
 			ps.executeUpdate();
 			List<String> successes = new ArrayList<>();
-			successes.add("登録しました。");
-			//session.setAttribute("successes", successes);
-			req.setAttribute("successes", successes);
+			if(category.equals("1")) {
+				category="食費";
+			}else if (category.equals("2")) {
+				category = "日用品";
+			}else if(category.equals("3")) {
+				category = "交際費";
+			}else {
+				return;
+			}
+			successes.add("「" + dating + " " + category + " " + money + "」" + "を登録しました。");
+			session.setAttribute("successes", successes);
 
 			resp.sendRedirect("index.html");
 
@@ -144,7 +153,7 @@ public class CopyServlet extends HttpServlet {
 		}
 
 		//カテゴリーの必須入力
-		if (!category.equals("1") && !category.equals("2")) {
+		if (!category.equals("1") && !category.equals("2") && !category.equals("3") && !category.equals("4")&& ! category.equals("5")) {
 			errors.add("カテゴリーは必須入力です。");
 		}
 

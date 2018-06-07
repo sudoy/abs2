@@ -117,7 +117,7 @@
 												class="dropdown-item" href="copy.html?id=${myhab.id}"><span
 												class="oi oi-paperclip"></span> コピー</a>
 											<div class="dropdown-divider"></div>
-											<a class="dropdown-item delete-btn" href="index.html?id=${myhab.id}"><span
+											<a class="dropdown-item delete-btn" href="delete.html?id=${myhab.id}"><span
 												class="oi oi-trash"></span> 削除</a>
 										</div>
 									</div>

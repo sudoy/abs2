@@ -94,7 +94,7 @@ public class UpdateServlet extends HttpServlet {
 		List<String> errors = validate(id, dating, inOut, category, memo, money);
 		if (errors.size() > 0) {
 			req.setAttribute("errors", errors);
-			//session.setAttribute("errors", errors);
+			session.setAttribute("errors", errors);
 			getServletContext().getRequestDispatcher("/WEB-INF/update.jsp").forward(req, resp);
 			return;
 		}
@@ -116,12 +116,24 @@ public class UpdateServlet extends HttpServlet {
 			ps.setString(4, memo);
 			ps.setString(5, money);
 			ps.setString(6, id);
-System.out.println(ps);
+
 			ps.executeUpdate();
 
+			//成功メッセージ
 			List<String> successes = new ArrayList<>();
+			
+			if(category.equals("1")) {
+				category="食費";
+			}else if (category.equals("2")) {
+				category = "日用品";
+			}else if(category.equals("3")) {
+				category = "交際費";
+			}else {
+				return;
+			}
 			successes.add("更新しました。");
 			session.setAttribute("successes", successes);
+
 			resp.sendRedirect("index.html");
 		} catch (Exception e) {
 			throw new ServletException(e);
@@ -148,7 +160,7 @@ System.out.println(ps);
 		}
 
 		//カテゴリーの必須入力
-		if (!category.equals("1") && !category.equals("2")) {
+		if (!category.equals("1") && !category.equals("2") && !category.equals("3") && !category.equals("4")&& ! category.equals("5")) {
 			errors.add("カテゴリーは必須入力です。");
 		}
 

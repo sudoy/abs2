@@ -81,7 +81,7 @@ public class EntryServlet extends HttpServlet {
 			}else {
 				return;
 			}
-			successes.add("「" + dating + " " + category + " " + money + "」" + "登録しました。");
+			successes.add("「" + dating + " " + category + " " + money + "」" + "を登録しました。");
 			session.setAttribute("successes", successes);
 
 			resp.sendRedirect("index.html");
