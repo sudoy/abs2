@@ -14,7 +14,7 @@ public class DBUtils {
 
 		Context initContext = new InitialContext();
 		Context envContext = (Context) initContext.lookup("java:/comp/env");
-		DataSource ds = (DataSource) envContext.lookup("abs2");
+		DataSource ds = (DataSource) envContext.lookup("project1");
 
 		return ds.getConnection();
 
@@ -25,4 +25,5 @@ public class DBUtils {
 			con.close();
 		}
 	}
+
 }
